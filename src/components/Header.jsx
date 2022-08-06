@@ -1,14 +1,19 @@
-import React from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 
 import logo from '../assets/vite.svg';
 
+
+
+
 const Header = () => {
   const {i18n} = useTranslation();
+  const [lang, setLang] = useState(i18n.language);
 
   const handleChangeLanguage = (lang) => {
     i18n.changeLanguage(lang);
+    setLang(lang);
   }
 
   return (
@@ -26,12 +31,12 @@ const Header = () => {
         </ul>
         <div className='flex flex-row gap-2 items-center'>
           <button 
-            className={`p-1 rounded border ${i18n.language == 'en' ? 'border-gray-200' : 'border-violet-800'}`} 
+            className={`p-1 rounded border ${lang == 'en' ? 'border-gray-200' : 'border-violet-800'}`} 
             onClick={() => handleChangeLanguage('en')}
           >En</button>
           <span>|</span> 
           <button 
-            className={`p-1 rounded border ${i18n.language == 'it' ? 'border-gray-200' : 'border-violet-800'}`} 
+            className={`p-1 rounded border ${lang == 'it' ? 'border-gray-200' : 'border-violet-800'}`} 
             onClick={() => handleChangeLanguage('it')}
           >It</button>
         </div>

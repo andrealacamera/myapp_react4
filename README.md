@@ -20,7 +20,7 @@ Add i18next `npm install react-i18next i18next --save`. See [instructions](https
 
 1. Create new `/src/assets/locales/{lng}/common.json` files, where each `{lng}` is the language to use, and fill with the translations.
 
-2. Add `/src/i18.js`, beside the `main.jsx` file, and import the JSON translations. In order to import several files (different namespaces), check [this page](https://www.i18next.com/how-to/add-or-load-translations) or [this one](https://www.i18next.com/overview/api#addresourcebundle). In the basic example here below, we set by hand the default language. If you'd like to detect user language and load translation, see the [guide](https://react.i18next.com/latest/using-with-hooks).
+2. Add `/src/i18.js`, beside the `main.jsx` file, and import the JSON translations. In order to import several files (different namespaces), check [this page](https://www.i18next.com/how-to/add-or-load-translations) or [this one](https://www.i18next.com/overview/api#addresourcebundle). In the basic example here below, we set by hand the default language. In the advanced phase of the project, I will set the user language by the `i18next-browser-languagedetector` package, see the [guide](https://react.i18next.com/latest/using-with-hooks). 
 
 ```js
 import i18n from "i18next";
@@ -42,6 +42,7 @@ i18n
   .init({
     resources,
     lng: 'it',
+    supportedLngs: ['en', 'it']
   });
 
 export default i18n;
