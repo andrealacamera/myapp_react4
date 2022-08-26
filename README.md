@@ -16,15 +16,16 @@ created on 2022-08-05, updated on 2022-08-05
 
 ## Setup i18next
 
-Add i18next `npm install react-i18next i18next --save`. See [instructions](https://react.i18next.com/guides/quick-start) or follow these steps.
+Add i18next `npm install react-i18next i18next i18next-browser-languagedetector --save`. See [instructions](https://react.i18next.com/guides/quick-start) or follow these steps.
 
 1. Create new `/src/assets/locales/{lng}/common.json` files, where each `{lng}` is the language to use, and fill with the translations.
 
-2. Add `/src/i18.js`, beside the `main.jsx` file, and import the JSON translations. In order to import several files (different namespaces), check [this page](https://www.i18next.com/how-to/add-or-load-translations) or [this one](https://www.i18next.com/overview/api#addresourcebundle). In the basic example here below, we set by hand the default language. In the advanced phase of the project, I will set the user language by the `i18next-browser-languagedetector` package, see the [guide](https://react.i18next.com/latest/using-with-hooks). 
+2. Add `/src/i18.js`, beside the `main.jsx` file, and import the JSON translations. In order to import several files (different namespaces), check [this page](https://www.i18next.com/how-to/add-or-load-translations) or [this one](https://www.i18next.com/overview/api#addresourcebundle). In the example here below, we set user language by using the `i18next-browser-languagedetector` package, see the [guide](https://react.i18next.com/latest/using-with-hooks). 
 
 ```js
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 import COMMON_EN from '../src/assets/locales/en-US/common.json';
 import COMMON_IT from '../src/assets/locales/it-IT/common.json';
@@ -35,14 +36,16 @@ const resources = {
   },
   it: {
     translation: COMMON_IT
-  }}
-
+  },
+}
+console.log(resources)
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
+  .use(LanguageDetector)
   .init({
     resources,
-    lng: 'it',
-    supportedLngs: ['en', 'it']
+    fallbackLng: 'it',
+    supportedLngs: ['en', 'it'],
   });
 
 export default i18n;
